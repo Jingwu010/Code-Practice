@@ -21,20 +21,20 @@ isMatch("ab", ".*") → true
 isMatch("aab", "c*a*b") → true
 ```
 
-Notice, isMatch(s, p), first string will always be text, second string will be the pattern
+Notice, isMatch(s, p), first string will always be the text, second string will be the pattern
 
 
 
 #### Solution 1 brute-force recursion TLE
 
-Whenever we get two string, first one is text, second one is pattern,  we want to fit the pattern into the text.
+Whenever we get two strings, first one is text, second one is pattern,  we want to fit the pattern into the text.
 
-There are mainly two decision:
+There are mainly two decisions:
 
 1. Is the char in pattern a * or not
    - if it is, then we can use it zero time
    - or multiple times as we want
-2. Is the char in pattern and text match or not
+2. Is the char in pattern and text matches or not
    + if it is, then we can move one step forward towards both string
    + else end here and return a false for this possibility
 
@@ -68,13 +68,13 @@ else:
 return flag
 ```
 
-Then I came into the problem "How does the algorithm terminates?" My first thought was adding a special character to both end of string and will not make it paired up with other normal character. Which proves to be inefficient and complicated.
+Then I came into the problem "How does the algorithm terminates?" My first thought was adding a special character to both end of strings and do not make it paired up with other normal characters. Which proves to be inefficient and complicated.
 
 
 
 #### Solution 2 Recursion 2, TLE
 
-The second way to do it is much more efficient and neat. Here comes to my second version, a lot of improvment on shrinking the code and make it more understandable.
+The second way to do it is much more efficient and neat. Here comes to my second version, a lot of improvments on condensing the code and make it more understandable.
 
 ```python
 def isMatch(self, text, pattern):
@@ -103,11 +103,11 @@ The second version is much better than version one. However, it is still Time Li
 
 #### Version 3 Dynamic Programming AC
 
-Why dp? Because we have the above recursion skeleton, which is good, but not efficient. Then, it is nature to ask myself, can I store the result of each recursion and make it use the result it previously calculated? Yes, it is the thought of DP! **Key point here is not thinking dp first, think recursion first and then it is nature to think store results of recursion, and it comes to the idea of dp**
+Why dp? Because I have the above recursion skeleton, which is good, but not efficient. Then, it is nature to ask myself, can I store the result of each recursion and make compute uses the result that it previously calculated? Yes, it is the idea of DP! **Key point here is not thinking dp first, think recursion first and then it is nature to think store results of recursion, and it comes to the idea of dp**
 
-Look back at the code, I called isMatch(text, pattern) multiple times in my function, each time I shrink the length of text and pattern, that means, for each subtext and subpattern, they have a corresponding result for the bigger problem
+Look back at the code, I called isMatch(text, pattern) multiple times in my function, each time I shrinked the length of text and pattern, that means, for each subtext and subpattern, they contribute a subresult for the bigger problem.
 
-that is to say text[i:] and pattern[j:] is useful when calculating isMatch(text, pattern) for each possible i and j
+That is to say text[i:] and pattern[j:] is useful when calculating isMatch(text, pattern) for each possible i and j
 
 ```python
 res = {}
